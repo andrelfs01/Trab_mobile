@@ -14,7 +14,7 @@ public class Nova_TarefaActivity extends Activity {
 	private Tarefa tarefa = new Tarefa();
 	private EditText nomeEt;
 	private Button salvarBt;
-	private long a = 1;
+
 	
 	
 	@Override
@@ -23,8 +23,9 @@ public class Nova_TarefaActivity extends Activity {
 		setContentView(R.layout.activity_nova_tarefa);
 		
 		nomeEt = (EditText) findViewById(R.id.nome);
-		salvarBt = (Button) findViewById(R.id.salvar);
 		
+		salvarBt = (Button) findViewById(R.id.salvar);
+		/*
 		Intent intent = getIntent();
 		if(intent != null){
 			Bundle bundle = intent.getExtras();
@@ -34,14 +35,16 @@ public class Nova_TarefaActivity extends Activity {
 				nomeEt.setText(tarefa.getNome());
 				salvarBt.setVisibility(View.GONE);
 			}
-		}
+		}*/
 	}
 
 	public void salvarTarefa(View view){
 		Log.i("Script", "entrou");
-		tarefa.setNome(nomeEt.getText().toString());
-		//tarefa.setId(a);
-		//a++;
+		//nomeET.get
+		System.out.println(nomeEt);
+		String s = nomeEt.getText().toString();
+		Log.i("Script",s);
+		
 		BD bd = new BD(this);
 		Log.i("Script", "abriu");
 		bd.inserir(tarefa);

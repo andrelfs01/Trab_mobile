@@ -3,6 +3,7 @@ package br.trabalho_moveis;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class BDCore extends SQLiteOpenHelper {
 	private static final String NOME_BD = "banco_trab";
@@ -10,7 +11,9 @@ public class BDCore extends SQLiteOpenHelper {
 	
 	
 	public BDCore(Context ctx){
+		
 		super(ctx, NOME_BD, null, VERSAO_BD);
+		Log.i("Script", "ultimo construtor");
 	}
 	
 	

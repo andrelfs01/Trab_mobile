@@ -22,7 +22,7 @@ public class BD {
 	public void inserir(Tarefa tarefa){
 		ContentValues valores = new ContentValues();
 		valores.put("nome", tarefa.getNome());
-		valores.put("id", tarefa.getId());
+		valores.put("_id", tarefa.getId());
 		bd.insert("tarefa", null, valores);	
 	}
 	
