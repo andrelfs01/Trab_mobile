@@ -5,8 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class BDCore extends SQLiteOpenHelper {
-	private static final String NOME_BD = "teste";
-	private static final int VERSAO_BD = 8;
+	private static final String NOME_BD = "banco_trab";
+	private static final int VERSAO_BD = 1;
 	
 	
 	public BDCore(Context ctx){
