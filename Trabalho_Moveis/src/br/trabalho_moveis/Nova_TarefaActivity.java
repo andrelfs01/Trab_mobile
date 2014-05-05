@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class Nova_TarefaActivity extends Activity {
 	private Tarefa tarefa = new Tarefa();
-	private EditText nomeEt;
+	private EditText nomeEt  = null;
 	private Button salvarBt;
 
 	
@@ -41,7 +41,7 @@ public class Nova_TarefaActivity extends Activity {
 	public void salvarTarefa(View view){
 		Log.i("Script", "entrou");
 		//nomeET.get
-		System.out.println(nomeEt);
+		nomeEt = (EditText) findViewById(R.id.nome);
 		String s = nomeEt.getText().toString();
 		Log.i("Script",s);
 		
