@@ -7,12 +7,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class BD {
 	private SQLiteDatabase bd;
 	
 	public BD(Context context){
 		BDCore auxBd = new BDCore(context);
+		Log.i("Script","dentro do construtor");
 		bd = auxBd.getWritableDatabase();
 	}
 	

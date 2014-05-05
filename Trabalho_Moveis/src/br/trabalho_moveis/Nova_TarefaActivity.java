@@ -40,8 +40,8 @@ public class Nova_TarefaActivity extends Activity {
 	public void salvarTarefa(View view){
 		Log.i("Script", "entrou");
 		tarefa.setNome(nomeEt.getText().toString());
-		tarefa.setId(a);
-		a++;
+		//tarefa.setId(a);
+		//a++;
 		BD bd = new BD(this);
 		Log.i("Script", "abriu");
 		bd.inserir(tarefa);
