@@ -41,9 +41,11 @@ public class Nova_TarefaActivity extends Activity {
 	public void salvarTarefa(View view){
 		Log.i("Script", "entrou");
 		//nomeET.get
-		nomeEt = (EditText) findViewById(R.id.nome);
-		String s = nomeEt.getText().toString();
-		Log.i("Script",s);
+		if(findViewById(R.id.nome) != null){
+			nomeEt = (EditText) findViewById(R.id.nome);
+			String s = nomeEt.getText().toString();
+			Log.i("Script",s);
+		}
 		
 		BD bd = new BD(this);
 		Log.i("Script", "abriu");
