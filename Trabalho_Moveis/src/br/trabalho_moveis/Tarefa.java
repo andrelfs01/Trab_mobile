@@ -1,8 +1,18 @@
 package br.trabalho_moveis;
 
+import java.sql.Date;
+
 public class Tarefa {
 	private long id;
 	private String nome;
+	private Date ultima_data;
+	//private long id_responsavel;//tem q ter? eu n sei
+	private String descricao;
+	private boolean alarme;
+	//estudar API alarme
+	private long id_criador;
+	
+	
 	
 	public long getId(){
 		return id;
