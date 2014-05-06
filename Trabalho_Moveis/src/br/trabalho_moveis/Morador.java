@@ -4,7 +4,7 @@ public class Morador {
 	private long id;//n sei se precisa
 	private String nome;
 	private String telefone;
-	private long pontuação;
+	private long pontuacao;
 	
 	
 }
