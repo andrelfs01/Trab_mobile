@@ -30,6 +30,10 @@
             android:name="br.trabalho_moveis.Login_Activity"
             android:label="@string/title_activity_login_" >
         </activity>
+        <activity
+            android:name="br.trabalho_moveis.CriarActivity"
+            android:label="@string/title_activity_criar" >
+        </activity>
     </application>
 
 </manifest>
