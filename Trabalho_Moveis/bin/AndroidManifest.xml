@@ -34,6 +34,10 @@
             android:name="br.trabalho_moveis.CriarActivity"
             android:label="@string/title_activity_criar" >
         </activity>
+        <activity
+            android:name="br.trabalho_moveis.Votar_Activity"
+            android:label="@string/title_activity_votar_" >
+        </activity>
     </application>
 
 </manifest>

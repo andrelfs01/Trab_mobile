@@ -7,5 +7,6 @@
     <string name="title_activity_nova__tarefa">Nova_TarefaActivity</string>
     <string name="title_activity_login_">Login_Activity</string>
     <string name="title_activity_criar">CriarActivity</string>
+    <string name="title_activity_votar_">Votar_Activity</string>
 
 </resources>
