@@ -23,6 +23,8 @@ import android.widget.EditText;
 
 public class Login_Activity extends Activity {
 
+	private ArrayList<String> array;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,6 +42,8 @@ public class Login_Activity extends Activity {
 	public void entrarPlanning(View view){
 		
 		new Thread(){
+			private ArrayList<String> arrayItens;
+
 			public void run(){
 				HttpClient httpClient = new DefaultHttpClient();
 				//url aki>>
@@ -56,7 +60,13 @@ public class Login_Activity extends Activity {
 //					JSONArray array = new JSONArray(jsonString);
 					JSONObject jsonObj = new JSONObject(jsonString);
 					JSONArray array = jsonObj.getJSONArray("itens");
-					
+					if (array != null) { 
+						   for (int i=0;i<array.length();i++){ 
+							arrayItens.add(array.get(i).toString());
+						   } 
+						   setArrayItens(arrayItens);
+						   abrirTelaVotacao();
+					}
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -70,22 +80,17 @@ public class Login_Activity extends Activity {
 				}
 			}
 		}.start();
-		
+	}
+
+	protected void abrirTelaVotacao() {
 		Intent intent = new Intent();
-		ArrayList<String> arrayItens = new ArrayList<String>(); 
-		/*    
-		JSONArray jArray = (JSONArray)jsonObject; 
-		if (jArray != null) { 
-		   for (int i=0;i<jArray.length();i++){ 
-		    arrayItens.add(jArray.get(i).toString());
-		   } 
-		}
-		 */
-		
-		//arrayItens = JSONArray
-		intent.putStringArrayListExtra("itens", arrayItens);
-		
-		
+		intent.putStringArrayListExtra("itens", array);
+		startActivity(intent);
+		//é só isso msm?
+	}
+
+	protected void setArrayItens(ArrayList<String> arrayItens) {
+		this.array = arrayItens;
 		
 	}
 }

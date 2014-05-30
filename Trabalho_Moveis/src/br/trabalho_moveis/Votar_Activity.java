@@ -1,20 +1,28 @@
 package br.trabalho_moveis;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 
 public class Votar_Activity extends Activity {
-
+	ArrayList<String> itens;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_votar);
 		
-		//String[] valores = servlet.getById(id do planning)
-	
-		
+		Intent intent = getIntent();
+		if(intent != null){
+			Bundle  params = intent.getExtras();
+			if(params != null){
+				itens = params.getStringArrayList("itens");
+				//preencher a listview com os itens
+			}
+		}
 	}
 
 	@Override
