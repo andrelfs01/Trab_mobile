@@ -83,7 +83,7 @@ public class Login_Activity extends Activity {
 	}
 
 	protected void abrirTelaVotacao() {
-		Intent intent = new Intent();
+		Intent intent = new Intent(this, Votar_Activity.class);
 		intent.putStringArrayListExtra("itens", array);
 		startActivity(intent);
 		//é só isso msm?
