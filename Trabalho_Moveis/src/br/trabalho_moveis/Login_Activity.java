@@ -7,6 +7,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
@@ -49,6 +50,7 @@ public class Login_Activity extends Activity {
 				//url aki>>
 				EditText idED = (EditText) findViewById(R.id.editTextNomePlanning);
 				String id = idED.getText().toString();
+				HttpPost httpPost = new HttpPost();
 				HttpGet httpGet = new HttpGet(
 						"http://10.0.43.218:8080/WebServiceRest/planning/" + id);
 				//busca por id
