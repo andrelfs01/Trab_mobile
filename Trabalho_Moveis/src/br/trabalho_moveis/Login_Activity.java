@@ -52,7 +52,7 @@ public class Login_Activity extends Activity {
 				String id = idED.getText().toString();
 				HttpPost httpPost = new HttpPost();
 				HttpGet httpGet = new HttpGet(
-						"http://10.0.43.218:8080/WebServiceRest/planning/" + id);
+						"http://localhost:8080/WebServiceRest/planning/itens/"+ id);
 				//busca por id
 				HttpResponse response;
 				try {
