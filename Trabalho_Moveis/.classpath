@@ -6,6 +6,5 @@
 	<classpathentry exported="true" kind="lib" path="libs/android-support-v4.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="C:/Users/Wellington/Downloads/postgresql-9.3-1101.jdbc3.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

@@ -5,9 +5,10 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="16"
         android:targetSdkVersion="16" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -18,8 +19,9 @@
             android:name="br.trabalho_moveis.Login_Activity"
             android:label="@string/title_activity_login_" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
@@ -29,6 +31,10 @@
         <activity
             android:name="br.trabalho_moveis.Votar_Activity"
             android:label="@string/title_activity_votar_" >
+        </activity>
+        <activity
+            android:name="br.trabalho_moveis.DailogActivity"
+            android:label="@string/title_activity_dailog" >
         </activity>
     </application>
 

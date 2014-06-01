@@ -95,4 +95,9 @@ public class Login_Activity extends Activity {
 		this.array = arrayItens;
 		
 	}
+
+	public void criarPlanning(View v){
+		Intent intent = new Intent(this, CriarActivity.class);
+		startActivity(intent);
+	}
 }
