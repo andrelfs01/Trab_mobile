@@ -1,5 +1,6 @@
 package br.trabalho_moveis;
 
+import br.trabalho_moveis.NoticeDialogFragment.NoticeDialogListener;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -8,9 +9,16 @@ import android.content.DialogInterface;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.webkit.WebView.FindListener;
+import android.widget.EditText;
 
 public class DailogActivity extends DialogFragment {
-
+	NoticeDialogListener mListener;
+	
+	public DailogActivity(NoticeDialogListener host) {
+		this.mListener = host;
+	}
+	
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -24,16 +32,15 @@ public class DailogActivity extends DialogFragment {
 	           .setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
-	                   //adicionar na lista
+	            	   mListener.onDialogPositiveClick();
 	               }
 	           })
 	           .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
 	               public void onClick(DialogInterface dialog, int id) {
-	            	   DailogActivity.this.getDialog().cancel();
+	            	   
 	               }
 	           });      
 	    return builder.create();
 	}
-	
 
 }

@@ -25,7 +25,6 @@ public class Votar_Activity extends Activity {
 			Bundle  params = intent.getExtras();
 			if(params != null){
 				itens = (ArrayList<Item>)params.get("itens");
-				
 				preencherListView();
 			}
 		}

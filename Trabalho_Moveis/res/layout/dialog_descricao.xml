@@ -24,13 +24,5 @@
         android:fontFamily="sans-serif"
         android:hint="Descrição do item" />
     
-    <!-- <Button
-        android:id="@+id/buttonAddDialog"
-        android:layout_width="114dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="4dp"
-        android:paddingTop="10dp"
-        android:text="Adicionar" />
-    -->
+    
 </LinearLayout>

@@ -3,12 +3,15 @@ package br.trabalho_moveis;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class CriarActivity extends Activity {
+public class CriarActivity extends FragmentActivity implements NoticeDialogFragment.NoticeDialogListener{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +43,19 @@ public class CriarActivity extends Activity {
 	
 	public void showNoticeDialog() {
         // Create an instance of the dialog fragment and show it
-       // DailogActivity dialog = new DailogActivity();
-       // dialog.show(getSupportFragmentManager(), "NoticeDialogFragment");
+        DailogActivity dialog = new DailogActivity(this);
+        dialog.show(getSupportFragmentManager(), "NoticeDialogFragment");
+    }
+	
+	@Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        Log.i("Script", "Confirmou!");
+       
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+    	Log.i("Script", "Negou!");
     }
 	
 	

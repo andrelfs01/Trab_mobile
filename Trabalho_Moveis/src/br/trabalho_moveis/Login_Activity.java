@@ -43,12 +43,11 @@ public class Login_Activity extends Activity {
 	}
 	
 	
-	public void entrarPlanning(View view){
+	public void entrarPlanning(View view) throws InterruptedException{
 		
-		new Thread(){
-			private ArrayList<Item> arrayItens = new ArrayList<Item>();
-
+		Thread t = new Thread(){
 			public void run(){
+				ArrayList<Item> arrayItens = new ArrayList<Item>();
 				HttpClient httpClient = new DefaultHttpClient();
 				//url aki>>
 				EditText idED = (EditText) findViewById(R.id.editTextNomePlanning);
@@ -63,9 +62,8 @@ public class Login_Activity extends Activity {
 					String jsonString = EntityUtils.toString(response
 							.getEntity());
 					System.out.println(jsonString);
-					//JSONArray array = new JSONArray(jsonString);
-					JSONObject jsonObj = new JSONObject(jsonString);//talvez ("{"+jsonString+"}");
-					JSONArray array = jsonObj.getJSONArray("item");
+					JSONObject jsonObj = new JSONObject(jsonString);
+					JSONArray array = jsonObj.getJSONArray("itens");
 					Gson gson= new Gson();
 					
 					if (array != null){ 
@@ -74,7 +72,7 @@ public class Login_Activity extends Activity {
 						   } 
 						   System.out.println("passou");
 						   setArrayItens(arrayItens);
-						   abrirTelaVotacao();
+						   //
 					}
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
@@ -88,7 +86,10 @@ public class Login_Activity extends Activity {
 					e.printStackTrace();
 				}
 			}
-		}.start();
+		};
+		t.start();
+		t.join();
+		abrirTelaVotacao();		
 	}
 
 	protected void abrirTelaVotacao() {
