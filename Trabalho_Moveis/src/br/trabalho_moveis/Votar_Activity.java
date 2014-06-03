@@ -2,13 +2,18 @@ package br.trabalho_moveis;
 
 import java.util.ArrayList;
 
+import br.model.Item;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class Votar_Activity extends Activity {
-	ArrayList<String> itens;
+	ArrayList<Item> itens;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,10 +24,23 @@ public class Votar_Activity extends Activity {
 		if(intent != null){
 			Bundle  params = intent.getExtras();
 			if(params != null){
-				itens = params.getStringArrayList("itens");
-				//preencher a listview com os itens
+				itens = (ArrayList<Item>)params.get("itens");
+				
+				preencherListView();
 			}
 		}
+	}
+
+	private void preencherListView() {
+		ListView list = (ListView) findViewById(R.id.listView1);  
+		ArrayList<String>array= new ArrayList<String>();
+		
+		for(Item item: itens){
+			array.add(item.getNome());
+			
+		}
+		list.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, array));
+		
 	}
 
 	@Override

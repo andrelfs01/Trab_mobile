@@ -14,17 +14,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import br.model.Item;
+
+import com.google.gson.Gson;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
 public class Login_Activity extends Activity {
 
-	private ArrayList<String> array;
+	private ArrayList<Item> array;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,7 @@ public class Login_Activity extends Activity {
 	public void entrarPlanning(View view){
 		
 		new Thread(){
-			private ArrayList<String> arrayItens;
+			private ArrayList<Item> arrayItens = new ArrayList<Item>();
 
 			public void run(){
 				HttpClient httpClient = new DefaultHttpClient();
@@ -52,20 +55,24 @@ public class Login_Activity extends Activity {
 				String id = idED.getText().toString();
 				HttpPost httpPost = new HttpPost();
 				HttpGet httpGet = new HttpGet(
-						"http://localhost:8080/WebServiceRest/planning/itens/"+ id);
+						"http://10.0.2.2:8080/WebServiceRest/planning/itens/"+ id);
 				//busca por id
 				HttpResponse response;
 				try {
 					response = httpClient.execute(httpGet);
 					String jsonString = EntityUtils.toString(response
 							.getEntity());
-//					JSONArray array = new JSONArray(jsonString);
-					JSONObject jsonObj = new JSONObject(jsonString);
-					JSONArray array = jsonObj.getJSONArray("itens");
-					if (array != null) { 
-						   for (int i=0;i<array.length();i++){ 
-							arrayItens.add(array.get(i).toString());
+					System.out.println(jsonString);
+					//JSONArray array = new JSONArray(jsonString);
+					JSONObject jsonObj = new JSONObject(jsonString);//talvez ("{"+jsonString+"}");
+					JSONArray array = jsonObj.getJSONArray("item");
+					Gson gson= new Gson();
+					
+					if (array != null){ 
+						   for (int i = 0;i < array.length(); i++){
+							   arrayItens.add((Item)gson.fromJson(array.getString(i),Item.class));
 						   } 
+						   System.out.println("passou");
 						   setArrayItens(arrayItens);
 						   abrirTelaVotacao();
 					}
@@ -86,12 +93,12 @@ public class Login_Activity extends Activity {
 
 	protected void abrirTelaVotacao() {
 		Intent intent = new Intent(this, Votar_Activity.class);
-		intent.putStringArrayListExtra("itens", array);
+		intent.putExtra("itens", array);
 		startActivity(intent);
 		//é só isso msm?
 	}
 
-	protected void setArrayItens(ArrayList<String> arrayItens) {
+	protected void setArrayItens(ArrayList<Item> arrayItens) {
 		this.array = arrayItens;
 		
 	}
