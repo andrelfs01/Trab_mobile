@@ -51,14 +51,14 @@ public class DialogActivity extends DialogFragment {
 	    
 	    /*final EditText edtNome = (EditText) getView().findViewById(R.id.nome_item);*/
 	    
-	    final EditText edtNome = (EditText) getView().findViewById(R.id.nome_item);
-	    String teste = edtNome.getText().toString();
 	    
 	    //final String s = edtNome.getText().toString();
 	    // Add action buttons
 	    builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
+	            	   Log.i("Script",getActivity().getTitle()+" -> titulo da activity");
+	            	   EditText edtNome = (EditText)getActivity().findViewById(R.id.nome_item);
 	            	   Log.i("Script","texto da dialog: "+edtNome.getText().toString());
 	            	   mListener.onDialogPositiveClick(edtNome.getText().toString());
 	            	   

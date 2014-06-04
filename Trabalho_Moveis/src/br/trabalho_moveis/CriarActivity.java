@@ -83,12 +83,14 @@ public class CriarActivity extends FragmentActivity implements
 		//AlertDialog alertTeste = new AlertDialog(getApplicationContext());
 		//dialog.onAttach(this);
 		dialog.show(getSupportFragmentManager(), "DialogActivity");
-		EditText teste = (EditText) findViewById(R.id.nome_item);
+		
+		
 		
 	}
 
 	@Override
 	public void onDialogPositiveClick(String string) {
+	
 		Log.i("Script", "Confirmou!");
 		EditText id = (EditText) findViewById(R.id.nome_criarAct);
 		Log.i("Script","nome do plan: "+id.getText().toString());
