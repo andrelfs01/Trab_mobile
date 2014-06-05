@@ -36,6 +36,14 @@
             android:name="br.trabalho_moveis.DailogActivity"
             android:label="@string/title_activity_dailog" >
         </activity>
+        <activity
+            android:name="br.trabalho_moveis.CriarItemActivity"
+            android:label="@string/title_activity_criar_item" >
+        </activity>
+        <activity
+            android:name="br.trabalho_moveis.DefinirVotoActivity"
+            android:label="@string/title_activity_definir_voto" >
+        </activity>
     </application>
 
 </manifest>

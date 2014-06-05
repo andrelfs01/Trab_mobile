@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -20,10 +21,10 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class CriarActivity extends FragmentActivity implements
-		DialogActivity.NoticeDialogListener {
+public class CriarActivity extends Activity{
 	private ArrayList<Item> itens;
 	private ListView list;
+	EditText edtText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +70,34 @@ public class CriarActivity extends FragmentActivity implements
 		case R.id.add:
 			// Toast.makeText(this, "Menu Item add", Toast.LENGTH_SHORT)
 			// .show();
-			showNoticeDialog();
+			criaTelaCadastroItem();
 			break;
 		}
 
 		return true;
 	}
-
+	
+	public void criaTelaCadastroItem(){
+		Intent intent = new Intent(this, CriarItemActivity.class);		
+		startActivityForResult(intent, 1);
+	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent data){
+		if (requestCode == 1) {
+	        if(resultCode == RESULT_OK){
+	        	edtText = (EditText) findViewById(R.id.nome_criarAct);
+	        	Item item = new Item(edtText.getText().toString(),data.getStringExtra("nome"));
+	            itens.add(item);
+	            preencherListView();	            
+	        }
+	        if (resultCode == RESULT_CANCELED) {
+	            //Write your code if there's no result
+	        }
+	    }
+	}
+	
+	
+/*
 	public void showNoticeDialog() {
 		// Create an instance of the dialog fragment and show it
 		DialogActivity dialog = new DialogActivity();
@@ -105,5 +127,5 @@ public class CriarActivity extends FragmentActivity implements
 	public void onDialogNegativeClick() {
 		Log.i("Script", "Negou!");
 	}
-
+*/
 }

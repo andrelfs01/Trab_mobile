@@ -29,12 +29,54 @@
         android:ems="10"
         android:hint="Senha"
         android:inputType="textPassword" />
+    
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView 
+            android:layout_gravity="center_horizontal"
+            android:text="Duração da Votação"
+            android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+         />
+        
+		
+        <LinearLayout 
+            android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/checkBox1"
+            android:layout_width="wrap_content"
+            android:textSize="12sp"
+            android:layout_height="wrap_content"
+            android:text="3 minutos" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="5 minutos" />
+        
+        <CheckBox
+            android:textSize="12sp"
+            android:id="@+id/checkBox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7 minutos" />
+        </LinearLayout>        
+        
+        
+    </LinearLayout>
 
     <ListView
+        android:layout_marginTop="10dp"
         android:id="@+id/lv_criar"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_weight="0.4" >
+        android:layout_weight="0.35" >
     </ListView>
 
     <Button
