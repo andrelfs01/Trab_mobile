@@ -31,57 +31,51 @@
         android:inputType="textPassword" />
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Duração da Votação" />
 
-        
+        <RadioGroup
+            android:id="@+id/radio"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
 
-            <RadioGroup
-                android:id="@+id/radio"
-                android:layout_width="fill_parent"
+            <RadioButton
+                android:id="@+id/radio1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" 
-                android:layout_gravity="center_horizontal">
+                android:text="3 minutos"
+                android:textSize="12sp" />
 
-                <RadioButton
-                    android:id="@+id/radio1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3 minutos"
-                   
-                    android:textSize="12sp" />
+            <RadioButton
+                android:id="@+id/radio2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5 minutos"
+                android:textSize="12sp" />
 
-                <RadioButton
-                    android:id="@+id/radio2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5 minutos"
-                    
-                    android:textSize="12sp" />
-
-                <RadioButton
-                    android:id="@+id/radio3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="7 minutos"
-                    android:textSize="12sp" />
-            </RadioGroup>
-        
+            <RadioButton
+                android:id="@+id/radio3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7 minutos"
+                android:textSize="12sp" />
+        </RadioGroup>
     </LinearLayout>
-    
-    
-    
-    <TextView 
-        android:text="Itens:"
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        />
+        android:text="Itens:" />
 
     <ListView
         android:id="@+id/lv_criar"
@@ -93,11 +87,11 @@
 
     <Button
         android:id="@+id/buttonConcluir"
-        android:onClick="cadastarPlanning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
+        android:onClick="cadastarPlanning"
         android:text="Concluir" />
 
 </LinearLayout>
