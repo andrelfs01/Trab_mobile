@@ -11,5 +11,9 @@
     <string name="title_activity_dailog">DailogActivity</string>
     <string name="title_activity_criar_item">CriarItemActivity</string>
     <string name="title_activity_definir_voto">DefinirVotoActivity</string>
+    <string name="title_activity_resultado">ResultadoActivity</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="title_activity_fragment_android">FragmentAndroid</string>
 
 </resources>

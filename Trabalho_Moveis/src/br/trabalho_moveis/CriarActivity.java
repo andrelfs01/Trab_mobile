@@ -1,27 +1,26 @@
 package br.trabalho_moveis;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
-import br.model.Item;
-import br.model.ItemAdapter;
-
-import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import br.model.Item;
+import br.model.Planning;
 
-public class CriarActivity extends Activity{
+public class CriarActivity extends Activity {
 	private ArrayList<Item> itens;
 	private ListView list;
 	EditText edtText;
@@ -38,22 +37,17 @@ public class CriarActivity extends Activity{
 	}
 
 	private void preencherListView() {
-		/*
-		 * ArrayList<User> arrayOfUsers = new ArrayList<User>(); // Create the
-		 * adapter to convert the array to views 
-		 * UsersAdapter adapter = new UsersAdapter(this, arrayOfUsers); // Attach the adapter to a ListView
-		 * 
-		 * listView.setAdapter(adapter);
-		 */
+		
 		ArrayList<String> array = new ArrayList<String>();
 
 		for (Item item : itens) {
 			array.add(item.getNome());
 			Log.i("Script", item.getNome());
 		}
-		
-		//ItemAdapter adapter = new ItemAdapter(this, itens);
-		list.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, array));
+
+		// ItemAdapter adapter = new ItemAdapter(this, itens);
+		list.setAdapter(new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, array));
 
 	}
 
@@ -76,56 +70,102 @@ public class CriarActivity extends Activity{
 
 		return true;
 	}
-	
-	public void criaTelaCadastroItem(){
-		Intent intent = new Intent(this, CriarItemActivity.class);		
+
+	public void criaTelaCadastroItem() {
+		Intent intent = new Intent(this, CriarItemActivity.class);
 		startActivityForResult(intent, 1);
 	}
-	
-	public void onActivityResult(int requestCode, int resultCode, Intent data){
+
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 1) {
-	        if(resultCode == RESULT_OK){
-	        	edtText = (EditText) findViewById(R.id.nome_criarAct);
-	        	Item item = new Item(edtText.getText().toString(),data.getStringExtra("nome"));
-	            itens.add(item);
-	            preencherListView();	            
-	        }
-	        if (resultCode == RESULT_CANCELED) {
-	            //Write your code if there's no result
-	        }
-	    }
+			if (resultCode == RESULT_OK) {
+				edtText = (EditText) findViewById(R.id.nome_criarAct);
+				Item item = new Item(edtText.getText().toString(),
+						data.getStringExtra("nome"));
+				itens.add(item);
+				preencherListView();
+			}
+			if (resultCode == RESULT_CANCELED) {
+				// Write your code if there's no result
+			}
+		}
 	}
-	
-	
-/*
-	public void showNoticeDialog() {
-		// Create an instance of the dialog fragment and show it
-		DialogActivity dialog = new DialogActivity();
+
+	public void cadastarPlanning(View v) {
+		EditText nome = (EditText) findViewById(R.id.nome_criarAct);
+		EditText senha = (EditText) findViewById(R.id.editText2);
+		String nomeP = nome.getText().toString();
+		String senhaP = senha.getText().toString();
+		if (!nomeP.isEmpty()) {
+			if (!senhaP.isEmpty()) {		
+				if (!itens.isEmpty()) {
+					// prosseguir
+					Planning p = new Planning(nomeP, senhaP);
+					// identificar radio button
+					String termino = calcularTermino();
+					
+					
+					//setar o ID do planning em todos!!!!
+					setarIDPlanning(nomeP);
+					//enviar planning
+					enviarPlanningToServer(p);
+					//enviar itens
+					enviarItensToServer();
+					//abrir tela de votacao
+				} else {
+					// nao tem itens
+				}
+			} else {
+				// Campo senha vazio
+			}
+		} else {
+			// Campo nome(ID) vazio
+
+		}
+
+	}
+
+	private String calcularTermino() {
+		int duracao = obterDuracao();
+		Calendar c = Calendar.getInstance();
 		
-		//AlertDialog alertTeste = new AlertDialog(getApplicationContext());
-		//dialog.onAttach(this);
-		dialog.show(getSupportFragmentManager(), "DialogActivity");
-		
-		
+		int min = c.get(Calendar.MINUTE);
+		int h = c.get(Calendar.HOUR);
+		if(min + duracao > 59){
+			h = h+1;
+			min = min - 59;
+		}
+		return h+":"+min;
+	}
+
+	private void enviarItensToServer() {
+		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void onDialogPositiveClick(String string) {
-	
-		Log.i("Script", "Confirmou!");
-		EditText id = (EditText) findViewById(R.id.nome_criarAct);
-		Log.i("Script","nome do plan: "+id.getText().toString());
-		Log.i("Script","nome do item: "+string);
-		Item i = new Item(id.getText().toString(), string);
-		itens.add(i);
-		// atualizar
-		preencherListView();
+	private void enviarPlanningToServer(Planning p) {
+		// TODO Auto-generated method stub
+		
 	}
 
-	@Override
-	public void onDialogNegativeClick() {
-		Log.i("Script", "Negou!");
+	private void setarIDPlanning(String nomeP) {
+		for (Item item : itens) {
+			item.setId_plan(nomeP);
+		}
+		
 	}
-*/
+
+	private int obterDuracao() {
+		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio);
+		int selectedId = radioGroup.getCheckedRadioButtonId();			         
+        RadioButton radioButton = (RadioButton) findViewById(selectedId);
+        if(radioButton.getText().toString().startsWith("3")){
+        	return 3;
+        }else if(radioButton.getText().toString().startsWith("5")){
+        	return 5;
+        }else{
+        	return 7;
+        }
+	}
+
 }

@@ -44,6 +44,26 @@
             android:name="br.trabalho_moveis.DefinirVotoActivity"
             android:label="@string/title_activity_definir_voto" >
         </activity>
+        <activity
+            android:name="br.trabalho_moveis.ResultadoActivity"
+            android:label="@string/title_activity_resultado" >
+        </activity>
+        <activity
+            android:name="br.trabalho_moveis.ItemListActivity"
+            android:label="@string/title_item_list" >
+        </activity>
+        <activity
+            android:name="br.trabalho_moveis.ItemDetailActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".ItemListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ItemListActivity" />
+        </activity>
+        <activity
+            android:name="br.trabalho_moveis.FragmentAndroid"
+            android:label="@string/title_activity_fragment_android" >
+        </activity>
     </application>
 
 </manifest>
