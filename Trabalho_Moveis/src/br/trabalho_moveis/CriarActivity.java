@@ -100,10 +100,10 @@ public class CriarActivity extends Activity {
 			if (!senhaP.isEmpty()) {		
 				if (!itens.isEmpty()) {
 					// prosseguir
-					Planning p = new Planning(nomeP, senhaP);
+					
 					// identificar radio button
 					String termino = calcularTermino();
-					
+					Planning p = new Planning(nomeP, senhaP, termino);
 					
 					//setar o ID do planning em todos!!!!
 					setarIDPlanning(nomeP);
