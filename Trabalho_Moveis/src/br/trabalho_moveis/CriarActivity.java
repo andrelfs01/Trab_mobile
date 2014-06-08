@@ -1,12 +1,26 @@
 package br.trabalho_moveis;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.util.EntityUtils;
+
+import com.google.gson.Gson;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +31,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import br.model.CadastroPlanning;
 import br.model.Item;
 import br.model.Planning;
 
@@ -37,7 +52,7 @@ public class CriarActivity extends Activity {
 	}
 
 	private void preencherListView() {
-		
+
 		ArrayList<String> array = new ArrayList<String>();
 
 		for (Item item : itens) {
@@ -92,26 +107,25 @@ public class CriarActivity extends Activity {
 	}
 
 	public void cadastarPlanning(View v) {
+
 		EditText nome = (EditText) findViewById(R.id.nome_criarAct);
 		EditText senha = (EditText) findViewById(R.id.editText2);
 		String nomeP = nome.getText().toString();
 		String senhaP = senha.getText().toString();
 		if (!nomeP.isEmpty()) {
-			if (!senhaP.isEmpty()) {		
+			if (!senhaP.isEmpty()) {
 				if (!itens.isEmpty()) {
 					// prosseguir
-					
+
 					// identificar radio button
 					String termino = calcularTermino();
 					Planning p = new Planning(nomeP, senhaP, termino);
-					
-					//setar o ID do planning em todos!!!!
+
+					// setar o ID do planning em todos!!!!
 					setarIDPlanning(nomeP);
-					//enviar planning
-					enviarPlanningToServer(p);
-					//enviar itens
-					enviarItensToServer();
-					//abrir tela de votacao
+					// enviar planning
+
+					enviarPlanningToServer(new CadastroPlanning(p, itens));
 				} else {
 					// nao tem itens
 				}
@@ -128,44 +142,76 @@ public class CriarActivity extends Activity {
 	private String calcularTermino() {
 		int duracao = obterDuracao();
 		Calendar c = Calendar.getInstance();
-		
+
 		int min = c.get(Calendar.MINUTE);
 		int h = c.get(Calendar.HOUR);
-		if(min + duracao > 59){
-			h = h+1;
+		if (min + duracao > 59) {
+			h = h + 1;
 			min = min - 59;
 		}
-		return h+":"+min;
+		return h + ":" + min;
 	}
 
-	private void enviarItensToServer() {
-		// TODO Auto-generated method stub
-		
-	}
+	private void enviarPlanningToServer(final CadastroPlanning cadastroPlanning) {
+		Thread t = new Thread() {
+			public void run() {
+				Looper.prepare();
+				Gson gson = new Gson();
+				String stringJson = gson.toJson(cadastroPlanning);
+				StringEntity se;
 
-	private void enviarPlanningToServer(Planning p) {
-		// TODO Auto-generated method stub
-		
+				HttpClient httpClient = new DefaultHttpClient();
+				HttpConnectionParams.setConnectionTimeout(
+						httpClient.getParams(), 10000);
+				HttpPost httpPost = new HttpPost(
+						"http://10.0.2.2:8080/WebServiceRest/planning/inserir");
+				try {
+					se = new StringEntity(stringJson);
+					httpPost.setHeader("Accept", "application/json");
+					httpPost.setHeader("Content-type", "application/json");
+					httpPost.setEntity(se);
+					final HttpResponse response = httpClient.execute(httpPost);
+					Log.i("Script", EntityUtils.toString(response.getEntity()));
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClientProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		};
+		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void setarIDPlanning(String nomeP) {
 		for (Item item : itens) {
 			item.setId_plan(nomeP);
 		}
-		
+
 	}
 
 	private int obterDuracao() {
 		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio);
-		int selectedId = radioGroup.getCheckedRadioButtonId();			         
-        RadioButton radioButton = (RadioButton) findViewById(selectedId);
-        if(radioButton.getText().toString().startsWith("3")){
-        	return 3;
-        }else if(radioButton.getText().toString().startsWith("5")){
-        	return 5;
-        }else{
-        	return 7;
-        }
+		int selectedId = radioGroup.getCheckedRadioButtonId();
+		RadioButton radioButton = (RadioButton) findViewById(selectedId);
+		if (radioButton.getText().toString().startsWith("3")) {
+			return 3;
+		} else if (radioButton.getText().toString().startsWith("5")) {
+			return 5;
+		} else {
+			return 7;
+		}
 	}
 
 }

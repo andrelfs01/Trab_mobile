@@ -6,6 +6,11 @@ public class CadastroPlanning {
 	private Planning p;
 	private ArrayList<Item> itens;
 	
+	public CadastroPlanning(Planning planning, ArrayList<Item> itens) {
+		this.p = planning;
+		this.itens = itens;
+	}
+	
 	public Planning getP() {
 		return p;
 	}
@@ -18,5 +23,4 @@ public class CadastroPlanning {
 	public void setItens(ArrayList<Item> itens) {
 		this.itens = itens;
 	}
-	
 }
