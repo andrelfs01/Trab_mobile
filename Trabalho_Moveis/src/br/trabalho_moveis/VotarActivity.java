@@ -13,6 +13,9 @@ import android.app.Activity;
 import android.content.Intent;
 import br.model.*;
 import android.view.Menu;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class VotarActivity extends Activity {
 
@@ -47,7 +50,15 @@ public class VotarActivity extends Activity {
 			}
 		}
 		//colocar no ListView
-		//
+		ListView list = (ListView) findViewById(R.id.lv_escolher_votar);
+		
+		ArrayList<String> nome_itens = new ArrayList<String>();
+		for (Item string : arrayItens) {
+			nome_itens.add(string.getNome());
+		}
+		
+		list.setAdapter(new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, nome_itens));
 	}
 
 	@Override
@@ -56,5 +67,6 @@ public class VotarActivity extends Activity {
 		getMenuInflater().inflate(R.menu.votar, menu);
 		return true;
 	}
+	
 
 }

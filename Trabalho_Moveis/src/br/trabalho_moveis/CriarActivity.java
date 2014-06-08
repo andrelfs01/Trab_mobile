@@ -96,8 +96,10 @@ public class CriarActivity extends Activity {
 		if (requestCode == 1) {
 			if (resultCode == RESULT_OK) {
 				edtText = (EditText) findViewById(R.id.nome_criarAct);
+				String nome = data.getExtras().getString("nome");
+				Log.i("Script", "ITEM VINDO DA TELA DE CRIAR "+nome);
 				Item item = new Item(edtText.getText().toString(),
-						data.getStringExtra("nome"));
+						nome);
 				itens.add(item);
 				preencherListView();
 			}

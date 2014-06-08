@@ -27,7 +27,9 @@ public class CriarItemActivity extends Activity {
 		Intent returnIntent = new Intent();
 		EditText et = (EditText) findViewById(R.id.nome_item);
 		String result = et.getText().toString();
-		returnIntent.putExtra("nome",result);
+		Bundle b = new Bundle();
+		b.putString("nome", result);
+		returnIntent.putExtras(b);
 		setResult(RESULT_OK,returnIntent);
 		finish();
 	}
