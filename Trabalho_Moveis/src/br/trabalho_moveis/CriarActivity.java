@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 import br.model.CadastroPlanning;
 import br.model.Item;
 import br.model.Planning;
@@ -127,13 +128,13 @@ public class CriarActivity extends Activity {
 
 					enviarPlanningToServer(new CadastroPlanning(p, itens));
 				} else {
-					// nao tem itens
+					Toast.makeText(this, "Lista de itens vazia", Toast.LENGTH_LONG).show();
 				}
 			} else {
-				// Campo senha vazio
+				Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_LONG).show();
 			}
 		} else {
-			// Campo nome(ID) vazio
+			Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_LONG).show();
 
 		}
 

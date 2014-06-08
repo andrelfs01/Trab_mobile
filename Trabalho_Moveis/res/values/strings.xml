@@ -15,5 +15,6 @@
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="title_activity_fragment_android">FragmentAndroid</string>
+    <string name="title_activity_votar">VotarActivity</string>
 
 </resources>

@@ -64,6 +64,10 @@
             android:name="br.trabalho_moveis.FragmentAndroid"
             android:label="@string/title_activity_fragment_android" >
         </activity>
+        <activity
+            android:name="br.trabalho_moveis.VotarActivity"
+            android:label="@string/title_activity_votar" >
+        </activity>
     </application>
 
 </manifest>

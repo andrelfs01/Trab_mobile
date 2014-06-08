@@ -25,8 +25,9 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f080012;
-        public static final int add=0x7f080011;
+        public static final int action_settings=0x7f080019;
+        public static final int add=0x7f080018;
+        public static final int button1=0x7f08000f;
         public static final int buttonConcluir=0x7f080007;
         public static final int criar=0x7f08000d;
         public static final int editText2=0x7f080001;
@@ -34,24 +35,31 @@ public final class R {
         public static final int editTextSenhaPlanning=0x7f08000b;
         public static final int entrar=0x7f08000c;
         public static final int imageView1=0x7f080009;
-        public static final int listView1=0x7f08000f;
         public static final int lv_criar=0x7f080006;
+        public static final int lv_escolher_votar=0x7f08000e;
         public static final int nome_criarAct=0x7f080000;
         public static final int nome_item=0x7f080008;
         public static final int radio=0x7f080002;
+        public static final int radio0=0x7f080013;
         public static final int radio1=0x7f080003;
         public static final int radio2=0x7f080004;
         public static final int radio3=0x7f080005;
-        public static final int submissao=0x7f080010;
-        public static final int textView1=0x7f08000e;
+        public static final int radio4=0x7f080014;
+        public static final int radio5=0x7f080015;
+        public static final int radio6=0x7f080016;
+        public static final int radioGroup1=0x7f080012;
+        public static final int salvar=0x7f080017;
+        public static final int textView1=0x7f080010;
+        public static final int textView2=0x7f080011;
     }
     public static final class layout {
         public static final int activity_criar=0x7f030000;
         public static final int activity_criar_item=0x7f030001;
         public static final int activity_login=0x7f030002;
         public static final int activity_resultado=0x7f030003;
-        public static final int activity_votar=0x7f030004;
+        public static final int activity_votacao=0x7f030004;
         public static final int item_listview_result=0x7f030005;
+        public static final int layout_votar_frag=0x7f030006;
     }
     public static final class menu {
         public static final int criar=0x7f070000;
@@ -63,7 +71,8 @@ public final class R {
         public static final int nova__tarefa=0x7f070006;
         public static final int resultado=0x7f070007;
         public static final int tarefas_=0x7f070008;
-        public static final int votar_=0x7f070009;
+        public static final int votar=0x7f070009;
+        public static final int votar_=0x7f07000a;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
@@ -77,6 +86,7 @@ public final class R {
         public static final int title_activity_login_=0x7f050004;
         public static final int title_activity_nova__tarefa=0x7f050003;
         public static final int title_activity_resultado=0x7f05000a;
+        public static final int title_activity_votar=0x7f05000e;
         public static final int title_activity_votar_=0x7f050006;
         public static final int title_item_detail=0x7f05000c;
         public static final int title_item_list=0x7f05000b;
