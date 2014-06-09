@@ -97,7 +97,7 @@ public class Login_Activity extends Activity {
 							boolean encerrado = jsonObj.getBoolean("encerrado");
 
 							setEncerrado(encerrado);
-
+							
 							JSONArray array = jsonObj.getJSONArray("itens");
 							Gson gson = new Gson();
 
@@ -149,11 +149,13 @@ public class Login_Activity extends Activity {
 		Intent intent = new Intent(this, VotarActivity.class);
 		Bundle b = new Bundle();
 		Gson gson = new Gson();
+		//array é um ArrayList<Item>  
 		String i = gson.toJson(array);
+		
 		b.putString("itens", i);
 		intent.putExtras(b);
 		startActivity(intent);
-		// é só isso msm?
+		
 	}
 
 	private void setEncerrado(boolean encerrado) {
