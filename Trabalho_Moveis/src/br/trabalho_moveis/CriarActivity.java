@@ -167,7 +167,7 @@ public class CriarActivity extends Activity {
 				HttpConnectionParams.setConnectionTimeout(
 						httpClient.getParams(), 10000);
 				HttpPost httpPost = new HttpPost(
-						"http://10.0.2.2:8080/WebServiceRest/planning/inserir");
+						"http://10.0.2.2:8080/WebServiceRest/planning/inserir");//10.0.2.2
 				try {
 					se = new StringEntity(stringJson);
 					httpPost.setHeader("Accept", "application/json");

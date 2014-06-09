@@ -32,6 +32,7 @@ public class Login_Activity extends Activity {
 
 	private ArrayList<Item> array;
 	private boolean encerrado;
+	private boolean senhaCorreta;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class Login_Activity extends Activity {
 
 		Thread t = new Thread() {
 			public void run() {
-				boolean autenticado = false;
+				senhaCorreta = false;
 				ArrayList<Item> arrayItens = new ArrayList<Item>();
 				HttpClient httpClient = new DefaultHttpClient();
 				// url aki>>
@@ -63,7 +64,7 @@ public class Login_Activity extends Activity {
 				String id = idED.getText().toString();
 
 				HttpGet httpGet = new HttpGet(
-						"http://10.0.2.2:8080/WebServiceRest/planning/altenticar/"
+						"http://10.0.2.2:8080/WebServiceRest/planning/autenticar/"
 								+ id + "/" + senha);//
 				// busca por id
 				HttpResponse response;
@@ -71,11 +72,11 @@ public class Login_Activity extends Activity {
 					response = httpClient.execute(httpGet);
 					String jsonString = EntityUtils.toString(response
 							.getEntity());
-					System.out.println(jsonString);
+					Log.i("Script","jsonString-> "+jsonString);
 					if (jsonString.equals("autenticado")) {
-						autenticado = true;
+						setAutenticado(true);
 					} else {
-						senhaInvalida();
+						setAutenticado(false);
 					}
 				} catch (ClientProtocolException e) {
 					// TODO Auto-generated catch block
@@ -84,7 +85,7 @@ public class Login_Activity extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} finally {
-					if (autenticado) {
+					if (senhaCorreta) {
 						try {
 							httpGet = new HttpGet(
 									"http://10.0.2.2:8080/WebServiceRest/planning/itens/"
@@ -92,25 +93,28 @@ public class Login_Activity extends Activity {
 							response = httpClient.execute(httpGet);
 							String jsonString = EntityUtils.toString(response
 									.getEntity());
-							System.out.println(jsonString);
+							Log.i("Script", "Resposta servlet" + jsonString);
 							JSONObject jsonObj = new JSONObject(jsonString);
 							boolean encerrado = jsonObj.getBoolean("encerrado");
-
 							setEncerrado(encerrado);
-							
-							JSONArray array = jsonObj.getJSONArray("itens");
 							Gson gson = new Gson();
-
-							if (array != null) {
-								for (int i = 0; i < array.length(); i++) {
-									arrayItens.add((Item) gson.fromJson(
-											array.getString(i), Item.class));
+							try{
+								JSONArray jarray = jsonObj.getJSONArray("itens");
+								if (jarray != null) {
+									for (int i = 0; i < jarray.length(); i++) {
+										
+										arrayItens.add((Item) gson.fromJson(
+												jarray.getString(i), Item.class));
+										Log.i("Script", "item dentro do for"+jarray.getString(i));
+									}
 								}
-								System.out.println("passou");
-								setArrayItens(arrayItens);
-								//
-
-							}
+							}catch(Exception e){
+								JSONObject jarray = jsonObj.getJSONObject("itens");
+								arrayItens.add((Item) gson.fromJson(
+										jarray.toString(), Item.class));
+							}			
+							System.out.println("passou");
+							setArrayItens(arrayItens);						
 
 						} catch (ClientProtocolException e) {
 							// TODO Auto-generated catch block
@@ -124,7 +128,7 @@ public class Login_Activity extends Activity {
 							e.printStackTrace();
 						}
 					} else {
-						senhaInvalida();
+						setAutenticado(false);
 					}
 				}
 			}
@@ -132,29 +136,46 @@ public class Login_Activity extends Activity {
 		};
 		t.start();
 		t.join();
-		if (!encerrado) {
-			abrirTelaVotacao();
-		}else{
-			abrirTelaResultado();
+
+		if (!senhaCorreta) {
+			senhaInvalida();
+		} else {
+
+			if (!encerrado) {
+				abrirTelaVotacao();
+			} else {
+				abrirTelaResultado();
+			}
 		}
+	}
+
+	private void setAutenticado(boolean b) {
+		senhaCorreta = b;
+
 	}
 
 	private void abrirTelaResultado() {
 		// TODO Auto-generated method stub
-		Toast.makeText(this,"abrirTelaResultado",Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "abrirTelaResultado", Toast.LENGTH_LONG).show();
 	}
 
 	protected void abrirTelaVotacao() {
-		//Toast.makeText(this,"abrirTelaVotacao",Toast.LENGTH_LONG).show();
+		// Toast.makeText(this,"abrirTelaVotacao",Toast.LENGTH_LONG).show();
 		Intent intent = new Intent(this, VotarActivity.class);
 		Bundle b = new Bundle();
 		Gson gson = new Gson();
-		//array é um ArrayList<Item>  
+		printArray();
 		String i = gson.toJson(array);
-		
+		Log.i("Script", "Escrevendo json para mandar via intent: " + i);
 		b.putString("itens", i);
 		intent.putExtras(b);
 		startActivity(intent);
+	}
+
+	private void printArray() {
+		for (Item item : array) {
+			Log.i("Script","cada item: "+item.getNome());
+		}
 		
 	}
 
