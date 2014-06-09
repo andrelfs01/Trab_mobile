@@ -14,7 +14,10 @@ import android.content.Intent;
 import br.model.*;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -36,8 +39,8 @@ public class VotarActivity extends Activity {
 				Log.i("Script", "json recebido via intent: " + jsonS);
 				Gson gson = new Gson();
 				try {
-					jsonS = "{\"itens\":"+jsonS+"}";
-					Log.i("Script",jsonS);
+					jsonS = "{\"itens\":" + jsonS + "}";
+					Log.i("Script", jsonS);
 					JSONObject json = new JSONObject(jsonS);
 					JSONArray array = json.getJSONArray("itens");
 
@@ -49,7 +52,6 @@ public class VotarActivity extends Activity {
 					}
 				} catch (Exception e) {
 					// TODO: handle exception
-
 					String object = jsonS.replace("[", "");
 					object = object.replace("]", "");
 					arrayItens.add((Item) gson.fromJson(object, Item.class));
@@ -57,14 +59,15 @@ public class VotarActivity extends Activity {
 			}
 			// colocar no ListView
 			ListView list = (ListView) findViewById(R.id.lv_escolher_votar);
-
 			ArrayList<String> nome_itens = new ArrayList<String>();
 			for (Item string : arrayItens) {
 				nome_itens.add(string.getNome());
 			}
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+					android.R.layout.simple_list_item_1, nome_itens);
+			list.setAdapter(adapter);
 
-			list.setAdapter(new ArrayAdapter<String>(this,
-					android.R.layout.simple_list_item_1, nome_itens));
+			list.setOnItemClickListener(chamaAtividades());
 		}
 	}
 
@@ -74,5 +77,27 @@ public class VotarActivity extends Activity {
 		getMenuInflater().inflate(R.menu.votar, menu);
 		return true;
 	}
+
+	public OnItemClickListener chamaAtividades() {
+		return (new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> av, View v, int position, long id) {
+				Intent intent;
+				Item i = arrayItens.get(position);
+				Bundle b = new Bundle();
+				b.putString("nome", i.getNome());
+				b.putInt("id", i.getId());
+				b.putString("id_plan", i.getId_plan());
+				intent = new Intent(getBaseContext(), VotarFragment.class);
+				intent.putExtras(b);
+				startActivityForResult(intent, 1);
+			}
+		});
+	}
+
+//	public void sair(View view) {
+//		finish();
+//	}
 
 }
