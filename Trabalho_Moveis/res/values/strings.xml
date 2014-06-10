@@ -16,5 +16,12 @@
     <string name="title_item_detail">Item Detail</string>
     <string name="title_activity_fragment_android">FragmentAndroid</string>
     <string name="title_activity_votar">VotarActivity</string>
-
+    <string name="nome_do_item">Nome do Item</string>
+    <string name="botao_adicionar">Adicionar</string>
+    <string name="botao_cancelar">Cancelar</string>
+    <string name="id_planning">ID Planning</string>
+    <string name="senha">Senha</string>
+    <string name="botao_entrar_plan">Entrar no Planning</string>   
+	<string name="botao_criar_plan">Criar PlanningPoker</string>
+	<string name="botao_salvar">Salvar</string>
 </resources>

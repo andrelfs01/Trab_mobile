@@ -12,10 +12,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome do Item" />
+        android:text="@string/nome_do_item" />
+    
     <EditText 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:inputType="text"
     	android:id="@+id/nome_item"
     />
     
@@ -23,7 +25,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adicionar"
+        android:text="@string/botao_adicionar"
         android:layout_gravity="center_horizontal"
         android:onClick="adicionarItem"
     />
@@ -34,6 +36,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:onClick="cancelar"
-        android:text="Cancelar" />
+        android:text="@string/botao_cancelar" />
 
 </LinearLayout>
