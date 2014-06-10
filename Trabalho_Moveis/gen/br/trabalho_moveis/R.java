@@ -48,7 +48,7 @@ public final class R {
         public static final int radio4=0x7f080014;
         public static final int radio5=0x7f080015;
         public static final int radio6=0x7f080016;
-        public static final int radioGroup1=0x7f080012;
+        public static final int radio_voto=0x7f080012;
         public static final int salvar=0x7f080017;
         public static final int textView2=0x7f080011;
         public static final int textView_votar=0x7f080010;
