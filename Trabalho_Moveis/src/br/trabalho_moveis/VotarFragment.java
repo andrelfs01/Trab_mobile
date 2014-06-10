@@ -45,7 +45,7 @@ public class VotarFragment extends Activity {
 	}
 	
 	private int obterValor() {
-		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radio_voto);
+		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
 		int selectedId = radioGroup.getCheckedRadioButtonId();
 		RadioButton radioButton = (RadioButton) findViewById(selectedId);
 		if (radioButton.getText().toString().equals("1")) {
